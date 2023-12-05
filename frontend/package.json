@@ -11,7 +11,6 @@
   },
   "dependencies": {
     "@headlessui/react": "^1.7.17",
-    "@heroicons/react": "^1.0.6",
     "@material-tailwind/react": "^2.1.4",
     "@reduxjs/toolkit": "^1.9.7",
     "@syncfusion/ej2-react-calendars": "^23.1.41",

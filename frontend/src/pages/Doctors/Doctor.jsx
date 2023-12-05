@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux";
 import getDoctors from "../../hooks/useFetchData";
 import Loader from "../../components/Loader/Loader";
 import Error from "../../components/About/Error";
+import Pagination from "../../components/pagination/Pagination";
 
 function Doctor() {
   const dispatch = useDispatch();
@@ -12,7 +13,11 @@ function Doctor() {
   const [search, setSearch] = useState("");
   const [filteredResult, setFilteredResult] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [currentPage, setCurrentPage] = useState(1)
+  const [postPerPage, setPostPerPage] = useState(8)
 
+
+  
   const { data, loading, error } = getDoctors(
     `${BASE_URL}/doctors/getAllDoctor`
   );
@@ -48,15 +53,19 @@ function Doctor() {
     const filteredDoctors = filterDoctors(docData);
     setFilteredResult(filteredDoctors);
   };
+
+
+  const lastPostIndex= currentPage*postPerPage;
+  const firstPostIndex=lastPostIndex-postPerPage;
+  const currentPosts= filteredResult.slice(firstPostIndex,lastPostIndex)
   return (
     <>
       <section>
-        
-        {isLoading && 
-           <div className="flex items-center justify-center h-screen">
-           <Loader />
-        </div>
-       }
+        {/* {isLoading && (
+          <div className="flex items-center justify-center h-screen">
+            <Loader />
+          </div>
+        )} */}
         {error && <Error errorMessage={error.message} />}
         {!isLoading && !error && (
           <section>
@@ -79,7 +88,11 @@ function Doctor() {
         <section>
           <div className="container">
             <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 ">
-              <DoctorsList data={filteredResult} />
+              <DoctorsList data={currentPosts} />
+            </div>
+            <div className=" mt-[80px]">
+
+              <Pagination postPerPage={postPerPage} totalPosts={filteredResult.length} setCurrentPage={setCurrentPage}  currentPage={currentPage}/>
             </div>
           </div>
         </section>
