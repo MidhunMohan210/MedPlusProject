@@ -6,6 +6,7 @@ import { AiFillStar } from "react-icons/ai";
 import FeedbackForm from "./FeedbackForm";
 import { BASE_URL, token } from "../../config.js";
 import dayjs from "dayjs";
+import Pagination from "../../components/pagination/Pagination.jsx";
 const path = "http://localhost:7000/userMedia/";
 
 
@@ -15,6 +16,8 @@ function DoctorFeedback({ details }) {
   const [showFeedBack, setShowFeedBack] = useState(false);
   const [reviews, setReviews] = useState([]);
   const [feedbackSubmitted, setFeedbackSubmitted] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [postPerPage, setPostPerPage] = useState(3);
 
   console.log(reviews);
 
@@ -50,6 +53,11 @@ function DoctorFeedback({ details }) {
 
   // console.log(reviews);
 
+  
+  const lastPostIndex = currentPage * postPerPage;
+  const firstPostIndex = lastPostIndex - postPerPage;
+  const currentReviews = reviews.slice(firstPostIndex, lastPostIndex);
+
   return (
     <div>
       <div className="mt-[50px]">
@@ -57,7 +65,7 @@ function DoctorFeedback({ details }) {
           All reviews ({reviews.length})
         </h4>
 
-        {reviews.map((el, index) => (
+        {currentReviews.map((el, index) => (
           <div key={index} className="flex justify-start gap-10 mb-[30px]">
             <div className="flex gap-3">
               <figure className="w-10 h-10 rounded-full ">
@@ -87,15 +95,15 @@ function DoctorFeedback({ details }) {
           </div>
         ))}
       </div>
-      {/* {!showFeedBack && (
-        <div className="text-center">
-          <button onClick={() => setShowFeedBack(true)} className="btn">
-            Give Feedback
-          </button>
-        </div>
-      )} */}
-
-      {/* {showFeedBack && <FeedbackForm details={details} setFeedbackSubmitted={setFeedbackSubmitted}/>} */}
+      <div className="mt-20 flex justify-start">
+        <Pagination
+          postPerPage={postPerPage}
+          totalPosts={reviews .length}
+          setCurrentPage={setCurrentPage}
+          currentPage={currentPage}
+        />
+      </div>
+     
     </div>
   );
 }
