@@ -2,8 +2,11 @@
 import { useEffect, useState } from "react";
 import AdminFetchData from "../../hooks/AdminFetchData";
 import { BASE_URL, adminToken } from "../../config";
+import Pagination from "../../components/pagination/Pagination";
 
 function Appointments() {
+  const [currentPage, setCurrentPage] = useState(1);
+  const [postPerPage, setPostPerPage] = useState(6);
   const { error, loading, data, refetch } = AdminFetchData(
     `${BASE_URL}/admin/getBookings`
   );
@@ -38,6 +41,11 @@ function Appointments() {
       console.log("error", error);
     }
   };
+
+  const lastPostIndex = currentPage * postPerPage;
+  const firstPostIndex = lastPostIndex - postPerPage;
+  const currentAppointments = Appointments.slice(firstPostIndex, lastPostIndex);
+  console.log(currentAppointments.length);
 
   return (
     <div>
@@ -162,8 +170,8 @@ function Appointments() {
             </tr>
           </thead>
           <tbody>
-            {Appointments &&
-              Appointments.map((el, index) => (
+            {currentAppointments &&
+              currentAppointments.map((el, index) => (
                 <tr
                   key={index}
                   className="bg-white border-b  hover:bg-[#cecece] hover:text-black dark:border-gray-700"
@@ -207,6 +215,14 @@ function Appointments() {
               ))}
           </tbody>
         </table>
+      </div>
+      <div className="mt-20">
+        <Pagination
+          postPerPage={postPerPage}
+          totalPosts={Appointments.length}
+          setCurrentPage={setCurrentPage}
+          currentPage={currentPage}
+        />
       </div>
     </div>
   );

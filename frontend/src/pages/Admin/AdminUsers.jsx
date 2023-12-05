@@ -1,12 +1,12 @@
 import { useState, useEffect } from "react";
 import fechUsers from "../../hooks/useFetchData";
 import { BASE_URL, adminToken } from "../../config";
-import { toast } from "react-toastify";
-import Swal from 'sweetalert2'  
-
-
+import Swal from "sweetalert2";
+import Pagination from "../../components/pagination/Pagination";
 
 const AdminUsers = () => {
+  const [currentPage, setCurrentPage] = useState(1);
+  const [postPerPage, setPostPerPage] = useState(5);
   const [users, setUsers] = useState([]);
   const { data, error, loading, refetch } = fechUsers(
     `${BASE_URL}/admin/getAllUser`
@@ -30,56 +30,57 @@ const AdminUsers = () => {
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
       confirmButtonText: "Yes, do it!",
-      cancelButtonText:"Cancel it"
-      
+      cancelButtonText: "Cancel it",
     });
 
-    if (confirmResult.isConfirmed){
+    if (confirmResult.isConfirmed) {
+      try {
+        const res = await fetch(`${BASE_URL}/admin/blockUser/${userId}`, {
+          method: "put",
+          headers: {
+            Authorization: `Bearer ${adminToken} `,
+          },
+        });
 
+        let result = await res.json();
+        console.log("result", result.message);
 
-    try {
-      const res = await fetch(`${BASE_URL}/admin/blockUser/${userId}`, {
-        method: "put",
-        headers: {
-          Authorization: `Bearer ${adminToken} `,
-        },
-      });
+        if (!res.ok) {
+          throw new Error(result.message);
+        }
+        Swal.fire({
+          title: "Done!",
+          text: "Your changed the patient status.",
+          icon: "success",
+        });
 
-      let result = await res.json();
-      console.log("result", result.message);
+        refetch();
+      } catch (error) {
+        console.log(error);
 
-      if (!res.ok) {
-        throw new Error(result.message);
+        Swal.fire({
+          title: "Error!",
+          text: "An error occurred while changing the status.",
+          icon: "error",
+        });
       }
-      Swal.fire({
-        title: "Done!",
-        text: "Your changed the patient status.",
-        icon: "success",
-      });
-        
-      refetch();
-    } catch (error) {
-      console.log(error);
-      
-      Swal.fire({
-        title: "Error!",
-        text: "An error occurred while changing the status.",
-        icon: "error",
-      });
-      
     }
-  }
   };
+
+  const lastPostIndex = currentPage * postPerPage;
+  const firstPostIndex = lastPostIndex - postPerPage;
+  const currentUsers = users.slice(firstPostIndex, lastPostIndex);
+
 
   return (
     <section className="container">
       <div className="relative mx-5 overflow-x-auto shadow-md sm:rounded-lg">
-        <table className="w-full text-sm text-left text-gray-500">
-          <thead className="text-xs text-gray-700 uppercase bg-[#ca62ea]">
+        <table className="w-full text-sm text-left text-gray-500 ">
+          <thead className="text-xs text-gray-700 uppercase bg-[#ca62ea] ">
             <tr>
-              <th scope="col" className="px-6 py-3">
+              {/* <th scope="col" className="px-6 py-3">
                 Sl.No
-              </th>
+              </th> */}
               <th scope="col" className="px-6 py-3">
                 Name
               </th>
@@ -95,18 +96,18 @@ const AdminUsers = () => {
             </tr>
           </thead>
           <tbody>
-            {users.length > 0 ? (
-              users.map((user, index) => (
+            {currentUsers.length > 0 ? (
+              currentUsers.map((user, index) => (
                 <tr
                   className="bg-white border-b hover:bg-[#e8e8ff]"
                   key={index}
                 >
-                  <th
+                  {/* <th
                     scope="row"
                     className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap"
                   >
                     {index + 1}
-                  </th>
+                  </th> */}
                   <td className="px-6 py-4">{user.name}</td>
                   <td className="px-6 py-4">{user.email}</td>
                   <td className="px-6 py-4">{user.bloodType}</td>
@@ -142,9 +143,17 @@ const AdminUsers = () => {
           </tbody>
         </table>
       </div>
+
+      <div className="mt-20">
+        <Pagination
+          postPerPage={postPerPage}
+          totalPosts={users.length}
+          setCurrentPage={setCurrentPage}
+          currentPage={currentPage}
+        />
+      </div>
     </section>
   );
-  
 };
 
 export default AdminUsers;

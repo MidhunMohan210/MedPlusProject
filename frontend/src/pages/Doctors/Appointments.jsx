@@ -4,11 +4,14 @@ import DoctorFetchData from "../../hooks/DoctorFetchData";
 import { BASE_URL, docToken } from "../../config";
 const path = "http://localhost:7000/userMedia/";
 import Swal from "sweetalert2";
+import Pagination from "../../components/pagination/Pagination";
 
 function Appointments() {
   const [openMlodal, setOpenModal] = useState(false);
   const [reason, setReason] = useState("");
   const [selectedBooking,setSelectedBooking]=useState('')
+  const [currentPage, setCurrentPage] = useState(1);
+  const [postPerPage, setPostPerPage] = useState(6);
 
   useEffect(() => {
     document.body.style.overflow = openMlodal ? "hidden" : "auto";
@@ -72,43 +75,7 @@ function Appointments() {
       setOpenModal(false)
 
     }
-    // } else if (confirmResult.isDenied) {
-    //   const reason = confirmResult.value;
-    //   console.log(reason);
-    //   try {
-    //     const res = await fetch(
-    //       `${BASE_URL}/doctors/cancelAppointmentDeleteSlot/${id}`,
-    //       {
-    //         method: "put",
-    //         headers: {
-    //           "Content-Type": "application/json",
-
-    //           Authorization: `Bearer ${docToken}`,
-    //         },
-    //         body: JSON.stringify({ reason }),
-    //       }
-    //     );
-
-    //     let result = res.json();
-
-    //     if (!res.ok) {
-    //       throw new Error(result.message);
-    //     }
-    //     Swal.fire({
-    //       title: "Done!",
-    //       text: "Your cancelled the appointment.",
-    //       icon: "success",
-    //     });
-    //     refetch();
-    //   } catch (error) {
-    //     console.log("error", error);
-    //     Swal.fire({
-    //       title: "Error!",
-    //       text: "An error occurred while Cancelling .",
-    //       icon: "error",
-    //     });
-    //   }
-    // }
+   
   };
 
   const deleteAppointmentWithOutSave = async (id) => {
@@ -148,48 +115,14 @@ function Appointments() {
       setOpenModal(false)
 
     }
-    // } else if (confirmResult.isDenied) {
-    //   const reason = confirmResult.value;
-    //   console.log(reason);
-    //   try {
-    //     const res = await fetch(
-    //       `${BASE_URL}/doctors/cancelAppointmentDeleteSlot/${id}`,
-    //       {
-    //         method: "put",
-    //         headers: {
-    //           "Content-Type": "application/json",
-
-    //           Authorization: `Bearer ${docToken}`,
-    //         },
-    //         body: JSON.stringify({ reason }),
-    //       }
-    //     );
-
-    //     let result = res.json();
-
-    //     if (!res.ok) {
-    //       throw new Error(result.message);
-    //     }
-    //     Swal.fire({
-    //       title: "Done!",
-    //       text: "Your cancelled the appointment.",
-    //       icon: "success",
-    //     });
-    //     refetch();
-    //   } catch (error) {
-    //     console.log("error", error);
-    //     Swal.fire({
-    //       title: "Error!",
-    //       text: "An error occurred while Cancelling .",
-    //       icon: "error",
-    //     });
-    //   }
-    // }
+   
   };
 
 
 
-
+  const lastPostIndex = currentPage * postPerPage;
+  const firstPostIndex = lastPostIndex - postPerPage;
+  const currentAppointments = Appointments.slice(firstPostIndex, lastPostIndex);
 
   return (
     <div>
@@ -311,8 +244,8 @@ function Appointments() {
             </tr>
           </thead>
           <tbody>
-            {Appointments &&
-              Appointments.map((el, index) => (
+            {currentAppointments &&
+              currentAppointments.map((el, index) => (
                 <tr
                   key={index}
                   className="bg-white border-b  hover:bg-[#cecece] hover:text-black dark:border-gray-700"
@@ -420,6 +353,14 @@ function Appointments() {
           </div>
         </div>
       )}
+      <div className="mt-20">
+        <Pagination
+          postPerPage={postPerPage}
+          totalPosts={Appointments.length}
+          setCurrentPage={setCurrentPage}
+          currentPage={currentPage}
+        />
+      </div>
     </div>
   );
 }

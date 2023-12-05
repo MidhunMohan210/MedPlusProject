@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import fetchDoctors from "../../hooks/useFetchData";
-import { Slide, toast } from "react-toastify";
 import { BASE_URL, adminToken } from "../../config";
 // import CertificateModal from "../../components/modals/CertificateModal";
 const path = "http://localhost:7000/doctorMedia/";
@@ -10,6 +9,7 @@ import { useNavigate } from "react-router-dom";
 import { BsChevronCompactLeft, BsChevronCompactRight } from "react-icons/bs";
 import { RxDotFilled } from "react-icons/rx";
 import { AiOutlineCloseCircle } from "react-icons/ai";
+import Pagination from "../../components/pagination/Pagination";
 
 const AdminDoctors = () => {
   const [doctors, setDoctors] = useState([]);
@@ -18,13 +18,13 @@ const AdminDoctors = () => {
   const [slides, setSlides] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [carosal, setCarosal] = useState(false);
-
-
+  const [currentPage, setCurrentPage] = useState(1);
+  const [postPerPage, setPostPerPage] = useState(5);
 
   const navigate = useNavigate();
 
   const modalHandler = (certificate) => {
-    setCarosal(true)
+    setCarosal(true);
     console.log(certificate);
     // Swal.fire({
     //   title: "Certificate",
@@ -56,10 +56,6 @@ const AdminDoctors = () => {
   const goToSlide = (slideIndex) => {
     setCurrentIndex(slideIndex);
   };
-
-
-
-
 
   const handleApprove = async (docId) => {
     const confirmResult = await Swal.fire({
@@ -245,6 +241,11 @@ const AdminDoctors = () => {
     }
   };
 
+
+  const lastPostIndex = currentPage * postPerPage;
+  const firstPostIndex = lastPostIndex - postPerPage;
+  const currentDoctors = doctors.slice(firstPostIndex, lastPostIndex);
+
   return (
     <div>
       <section className="container">
@@ -268,7 +269,6 @@ const AdminDoctors = () => {
                   video call
                 </th>
 
-
                 <th scope="col" className="px-6 py-3">
                   Certificate
                 </th>
@@ -281,8 +281,8 @@ const AdminDoctors = () => {
               </tr>
             </thead>
             <tbody className="border-2">
-              {doctors.length > 0 ? (
-                doctors.map((doctor, index) => (
+              {currentDoctors.length > 0 ? (
+                currentDoctors.map((doctor, index) => (
                   <tr
                     className="bg-white border-b hover:bg-gray-100 "
                     key={index}
@@ -424,10 +424,8 @@ const AdminDoctors = () => {
         </div>
       )}
 
-
-
-          {/* carosl  */}
-          {carosal && (
+      {/* carosl  */}
+      {carosal && (
         <div className="fixed top-0 left-0 w-full h-full flex justify-center items-center bg-gray-800 bg-opacity-50">
           <div className="max-w-[500px] h-[500px] w-full m-auto py-16 px-4 relative group">
             <AiOutlineCloseCircle
@@ -464,6 +462,16 @@ const AdminDoctors = () => {
       )}
 
       {/* carosl end  */}
+
+
+      <div className="mt-20">
+        <Pagination
+          postPerPage={postPerPage}
+          totalPosts={doctors.length}
+          setCurrentPage={setCurrentPage}
+          currentPage={currentPage}
+        />
+      </div>
     </div>
   );
 };
