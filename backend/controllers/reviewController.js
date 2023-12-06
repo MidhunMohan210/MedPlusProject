@@ -15,14 +15,15 @@ export const getAllReviews = async (req, res) => {
   }
 };
 
-
-
 ///grt doctor review////
 
 export const getDoctorReviews = async (req, res) => {
-  const docId=req.params.docId;
+  const docId = req.params.docId;
   try {
-    const reviews = await Review.find({doctor:docId}).populate({path:"user",select:"name photo"})
+    const reviews = await Review.find({ doctor: docId }).populate({
+      path: "user",
+      select: "name photo",
+    });
     res
       .status(200)
       .json({ success: true, message: "Successful", data: reviews });
@@ -32,17 +33,11 @@ export const getDoctorReviews = async (req, res) => {
   }
 };
 
-
-
-
-
 ///create Review
 
 export const createReview = async (req, res) => {
-
-    const {rating,reviewText,reviewTitle,doctor,user}=req.body.data
-    console.log("doctor",doctor);
-
+  const { rating, reviewText, reviewTitle, doctor, user } = req.body.data;
+  console.log("doctor", doctor);
 
   const newReview = new Review(req.body.data);
   try {
@@ -51,12 +46,35 @@ export const createReview = async (req, res) => {
       $push: { reviews: savedReview._id },
     });
 
-    res
-    .status(200)
-    .json({ success: true, message: "Review Added Successfully", data: savedReview });
+    res.status(200).json({
+      success: true,
+      message: "Review Added Successfully",
+      data: savedReview,
+    });
   } catch (error) {
     console.log(error);
-    res.status(500).json({ success: false, message: "Error in creating review" });
+    res
+      .status(500)
+      .json({ success: false, message: "Error in creating review" });
+  }
+};
+///deleteReview
 
+export const deleteReview = async (req, res) => {
+  const reviewId = req.params.reviewId;
+
+  try {
+    const deletion = await Review.findByIdAndDelete(reviewId);
+    console.log("deletion",deletion);
+
+    res.status(200).json({
+      success: true,
+      message: "Review Deleted Successfully",
+    });
+  } catch (error) {
+    console.log(error);
+    res
+      .status(500)
+      .json({ success: false, message: "Error in deleting review" });
   }
 };

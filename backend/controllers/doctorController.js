@@ -1,12 +1,12 @@
 import Booking from "../models/bookingSchema.js";
 import Doctor from "../models/doctorSchema.js";
 import { format } from "date-fns";
+import mongoose from "mongoose";
 
 ///////// getUserProfile  ////////////
 
 export const getDoctorProfile = async (req, res) => {
   const doctorId = req.userId;
-  console.log("doctorIddddddd", doctorId);
 
   try {
     const doctor = await Doctor.findById(doctorId);
@@ -49,7 +49,7 @@ export const getMyAppointments = async (req, res) => {
         slot: 1,
         isCancelled: 1,
       }
-    ).sort({appointmentDate:-1});
+    ).sort({ appointmentDate: -1 });
 
     if (bookings.length === 0) {
       throw new Error(" Oops! You didn't have any appointments yet!");
@@ -329,12 +329,14 @@ export const deleteQualification = async (req, res) => {
     );
 
     // Then, remove any null values from the qualifications array
-    await Doctor.updateOne(
+    const resultt = await Doctor.updateOne(
       { _id: docId },
       {
         $pull: { qualifications: null },
       }
     );
+
+    console.log("resultt", resultt);
 
     res.status(200).json({ message: "Qualification deleted successfully" });
   } catch (error) {
@@ -345,43 +347,39 @@ export const deleteQualification = async (req, res) => {
   }
 };
 
-//////   delete experinnce    ////////////
+//////   deleteExperience    ////////////
 
 export const deleteExperience = async (req, res) => {
-  console.log("heeyyyyy");
   const docId = req.userId;
-  const indexToDelete = req.query.index;
-  console.log(indexToDelete);
   console.log(docId);
-  const unsetOperation = {};
-  unsetOperation[`experiences.${indexToDelete}`] = 1;
-  const pullOperation = { $pull: { experiences: null } };
+  const indexToDelete = req.query.index;
+  console.log("I", indexToDelete);
 
   try {
-    const hai = await Doctor.updateOne(
+    // First, unset the element at the specified index
+    await Doctor.updateOne(
       { _id: docId },
       {
-        $unset: unsetOperation,
-        $pull: pullOperation,
+        $unset: { ["experiences." + indexToDelete]: 1 },
       }
     );
 
-    console.log(hai);
-
     // Then, remove any null values from the qualifications array
-    await Doctor.updateOne(
+    const resultt = await Doctor.updateOne(
       { _id: docId },
       {
         $pull: { experiences: null },
       }
     );
 
-    res.status(200).json({ message: "Experience deleted successfully" });
+    console.log("resultt", resultt);
+
+    res.status(200).json({ message: "experiences deleted successfully" });
   } catch (error) {
     console.error(error);
     res
       .status(500)
-      .json({ error: "An error occurred while deleting the experience" });
+      .json({ error: "An error occurred while deleting the experiences" });
   }
 };
 

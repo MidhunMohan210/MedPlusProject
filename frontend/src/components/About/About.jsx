@@ -29,9 +29,9 @@ function About() {
               on past achievements, we are committed to delivering nothing but
               the best in healthcare services and outcomes.
             </p>
-            <Link to="/">
+            {/* <Link to="/">
               <button className="btn ">Learn More</button>
-            </Link>
+            </Link> */}
           </div>
         </div>
       </div>

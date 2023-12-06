@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { Navigate } from "react-router-dom";
 
 const ProtectedDoctorRoute = ({ children, allowedTypes }) => {
@@ -11,15 +12,16 @@ const ProtectedDoctorRoute = ({ children, allowedTypes }) => {
     const type = user.type;
     const token = user.token;
 
+    // eslint-disable-next-line react/prop-types
     const isAllowed = allowedTypes.includes(type);
 
     const accessibleRoute =
-      token && isAllowed ? children : <Navigate to="/login" replace={true} />;
+      token && isAllowed ? children : <Navigate to="/doctors/login" replace={true} />;
 
     return accessibleRoute;
   } else {
 
-    return <Navigate to="/login" replace={true} />;
+    return <Navigate to="/doctors/login" replace={true} />;
   }
 };
 

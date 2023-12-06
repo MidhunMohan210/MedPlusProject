@@ -49,7 +49,7 @@ function Notification({ setNotification }) {
     }
   };
 
-  console.log(messages);
+  // console.log(messages);
 
   return (
     <div>

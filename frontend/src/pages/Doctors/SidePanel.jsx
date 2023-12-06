@@ -5,14 +5,11 @@ import { BASE_URL, token } from "../../config";
 import PayButton from "../../components/PayButton/PayButton";
 
 function SidePanel(details) {
-  console.log(details);
   const [date, setDate] = useState(new Date());
-  console.log(date);
   const [openDates, setOpenDates] = useState([]);
   const [slots, setSlots] = useState([]);
   const [showSlots, setShowSlots] = useState(false); // State to control the visibility of slots
   const [selectedTime, setselectedTime] = useState("");
-  console.log(selectedTime);
 
   const getAvailableDates = async () => {
     const res = await fetch(
@@ -59,9 +56,8 @@ function SidePanel(details) {
     setShowSlots(false);
   };
 
-  console.log(slots);
-  console.log(showSlots);
 
+console.log(slots);
   return (
     <div className="p-3 rounded-md shadow-panelShadow lg:p-5">
       <div className="flex items-center justify-between">
@@ -115,8 +111,7 @@ function SidePanel(details) {
           </div>
         ) : null}
       </div>
-      <PayButton docDetails={details} date={date} slot={selectedTime.slot} />
-      {/* <button className="w-full px-2 rounded-md btn">Book Appointment</button> */}
+      <PayButton  docDetails={details} date={date} slot={selectedTime.slot} disabled={!slots} />
     </div>
   );
 }

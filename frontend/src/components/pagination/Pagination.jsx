@@ -42,8 +42,8 @@ function Pagination({ totalPosts, postPerPage, setCurrentPage, currentPage }) {
             <a
               href="#"
               className={`${
-                currentPage === page ? "bg-violet-500 text-white border border-gray-900 " : ""
-              } flex items-center justify-center px-4 h-10 leading-tight text-gray-500 border border-gray-300 rounded-full hover:bg-gray-100 hover:text-gray-700`}
+                currentPage === page ? "bg-violet-500 text-white border rounded-full" : ""
+              } flex items-center justify-center px-4 h-10 leading-tight  hover:bg-gray-100 hover:text-gray-700`}
             >
               {page}
             </a>

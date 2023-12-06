@@ -27,35 +27,36 @@ import DoctorChat from '../pages/Doctors/DoctorChat'
 import Review from '../pages/Review'
 import VideoCallRoom from '../pages/Admin/VideoCallRoom'
 import ServiceDetails from '../pages/ServiceDetails'
+import ProtectedAdminRoute from './ProtectedAdmin'
 
 
 const Routers = () => {
   return (
    <Routes>
      <Route path='/' element={<Home />} />
-    <Route path='users/home' element={<Home />} />
+    <Route path='users/home' element={<ProtectedRoute allowedTypes={["patient"]}><Home /></ProtectedRoute>} />
     <Route path='/users' element={<Home />} />
-      <Route path='/users/doctors' element={<Doctors />} />
-      <Route path='/doctors/:id' element={<DoctorDetails />} />
+      <Route path='/users/doctors' element={ <ProtectedRoute allowedTypes={["patient"]}><Doctors /></ProtectedRoute>} />
+      {/* <Route path='/doctors/:id' element={<ProtectedRoute allowedTypes={["patient"]}><DoctorDetails /></ProtectedRoute>} /> */}
       <Route path='users/login' element={<Login />} />
       <Route path='/register' element={<Signup />} />
       <Route path='/contact' element={<Contact/>} />
-      <Route path='/services' element={<Services />} />
+      <Route path='/services' element={<ProtectedRoute allowedTypes={["patient"]}><Services /></ProtectedRoute>} />
       <Route path='/otp' element={<Otp/>} />
       <Route path='/doctorSignup' element={<DoctorSignup/>} />
       <Route path='/userProfile' element={ <ProtectedRoute allowedTypes={["patient"]} ><MyAccount/> </ProtectedRoute>} />
-      <Route path='/users/doctorDetails/:id' element={<DoctorDetails/>} />
-      <Route path='/users/paymentSuccess' element={<PaymentSuccess/>} />
-      <Route path='/users/paymentFailed' element={<PaymentFailed/>} />
-      <Route path='/users/bookingDetails/:id' element={<Review/>} />
-      <Route path='/users/serviceDetails/:service' element={<ServiceDetails/>} />
+      <Route path='/users/doctorDetails/:id' element={<ProtectedRoute allowedTypes={["patient"]}><DoctorDetails/></ProtectedRoute>} />
+      <Route path='/users/paymentSuccess' element={<ProtectedRoute allowedTypes={["patient"]}><PaymentSuccess/></ProtectedRoute>} />
+      <Route path='/users/paymentFailed' element={<ProtectedRoute allowedTypes={["patient"]}><PaymentFailed/></ProtectedRoute>} />
+      <Route path='/users/bookingDetails/:id' element={<ProtectedRoute allowedTypes={["patient"]}><Review/></ProtectedRoute>} />
+      <Route path='/users/serviceDetails/:service' element={<ProtectedRoute allowedTypes={["patient"]}><ServiceDetails/></ProtectedRoute>} />
 
 
       <Route path='/doctorOtp' element={<DoctorOtp/>} />
       <Route path='doctors/login' element={<DoctorLogin />} />
-      <Route path='doctors/home' element={<Home />} />
-      <Route path='/doctors/doctors' element={<Doctors />} />
-      <Route path='/doctors/doctorDetails/:id' element={<DoctorDetails/>} />
+      <Route path='doctors/home' element={<ProtectedDoctorRoute  allowedTypes={["doctor"]}><Home /></ProtectedDoctorRoute>} />
+      {/* <Route path='/doctors/doctors' element={<Doctors />} /> */}
+      {/* <Route path='/doctors/doctorDetails/:id' element={<DoctorDetails/>} /> */}
 
       <Route path='/doctors/doctorProfile' element={<ProtectedDoctorRoute  allowedTypes={["doctor"]} ><DoctorAccount/></ProtectedDoctorRoute>} />
       <Route path='/doctors/appointments' element={<ProtectedDoctorRoute  allowedTypes={["doctor"]} ><Appointments/></ProtectedDoctorRoute>} />
@@ -65,13 +66,12 @@ const Routers = () => {
 {/* ADMINNNNNN */}
      
       
-      <Route path='/admin/login' element={<AdminLogin/>}/>
-      <Route path='/admin/home' element={<AdminHome/>}/>
-      <Route path='/admin/users' element={<AdminUsers/>}/>
-      <Route path='/admin/doctors' element={<AdminDoctors/>}/>
-      <Route path='/admin/bookings' element={<AdminBookings/>}/>
-      <Route path='/admin/bookings' element={<AdminBookings/>}/>
-      <Route path='/admin/room/:roomId' element={<VideoCallRoom/>}/>
+      <Route path='/admin/login' element={<ProtectedAdminRoute  allowedTypes={["admin"]} ><AdminLogin/></ProtectedAdminRoute>}/>
+      <Route path='/admin/home' element={<ProtectedAdminRoute  allowedTypes={["admin"]} ><AdminHome/></ProtectedAdminRoute>}/>
+      <Route path='/admin/users' element={<ProtectedAdminRoute  allowedTypes={["admin"]} ><AdminUsers/></ProtectedAdminRoute>}/>
+      <Route path='/admin/doctors' element={<ProtectedAdminRoute  allowedTypes={["admin"]} ><AdminDoctors/></ProtectedAdminRoute>}/>
+      <Route path='/admin/bookings' element={<ProtectedAdminRoute  allowedTypes={["admin"]} ><AdminBookings/></ProtectedAdminRoute>}/>
+      <Route path='/admin/room/:roomId' element={<ProtectedAdminRoute  allowedTypes={["admin"]} ><VideoCallRoom/></ProtectedAdminRoute>}/>
       <Route path='*' element={<Error404/>}/>
 
 

@@ -49,7 +49,8 @@ function PayButton({ docDetails, date, slot }) {
     <div>
       <button
         onClick={() => handlePayment()}
-        className="w-full px-2 rounded-md btn"
+        className={`w-full px-2 rounded-md btn  `}
+        disabled={!slot}
       >
         Book Appointment
       </button>

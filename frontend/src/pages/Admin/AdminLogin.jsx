@@ -29,6 +29,7 @@ function AdminLogin() {
   const [formData, setFormData] = useState({
     email: "",
     password: "",
+    type:"admin"
   });
 
   const [loading, setLoading] = useState(false);

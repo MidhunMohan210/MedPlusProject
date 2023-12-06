@@ -134,10 +134,11 @@ function DoctorProfileSettings({ data, refetch }) {
   };
 
   const submitHandler = async (e) => {
+
+
     e.preventDefault();
     let updatedQualifications;
     let updatedExperiences;
-    setLoading(true);
 
     if (Object.values(qualifications[0]).every((value) => value === "")) {
       updatedQualifications = data.qualifications;
@@ -167,6 +168,43 @@ function DoctorProfileSettings({ data, refetch }) {
       certificate,
     };
     console.log(dataToUpdate);
+
+
+  
+  // Validation checks
+  if (!name.trim() || /\d/.test(name)) {
+    toast.error("Invalid name");
+    return;
+  }
+
+  const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
+  if (!emailRegex.test(email)) {
+    toast.error("Invalid email");
+    return;
+  }
+
+  if (!bio.trim() || bio.split(/\s+/).length > 50) {
+    toast.error("Invalid bio");
+    return;
+  }
+
+  if (!gender || !specialization || !fee) {
+    toast.error("Gender, specialization, and fee are required");
+    return;
+  }
+  // console.log(qualifications);
+
+  // if (qualifications.length === 1 && Object.values(qualifications[0]).every((value) => value === "")) {
+  //   toast.error("At least one qualification is required");
+  //   return;
+  // }
+
+  // if (experiences.length === 1 && Object.values(experiences[0]).every((value) => value === "")) {
+  //   toast.error("At least one experience is required");
+  //   return;
+  // }
+  setLoading(true);
+
 
     try {
       const formDataToSend = new FormData();
@@ -334,7 +372,7 @@ function DoctorProfileSettings({ data, refetch }) {
           Email
         </label>
       </div>
-      <div className="relative z-0 w-full mb-6 group">
+      <div className="relative hidden z-0 w-full mb-6 group">
         <input
           type="password"
           name="password"
@@ -428,14 +466,12 @@ function DoctorProfileSettings({ data, refetch }) {
             <option value="" disabled selected>
               Select Specialization
             </option>
-            <option value="Cardiologist">Cardiologist</option>
-            <option value="Dermatologist">Dermatologist</option>
-            <option value="Endocrinologist">Endocrinologist</option>
-            <option value="Gastroenterologist">Gastroenterologist</option>
-            <option value="Neurologist">Neurologist</option>
-            <option value="Orthopedist">Orthopedist</option>
-            <option value="Pediatrician">Pediatrician</option>
-            <option value="Psychiatrist">Psychiatrist</option>
+            <option value="Cardiologist">Pediatrics</option>
+         
+            <option value="Neurologist">Neurology</option>
+         
+            <option value="Pediatrician">Pediatrics</option>
+            <option value="Psychiatrist">Dermatology</option>
           </select>
           <label
             htmlFor="specialization"

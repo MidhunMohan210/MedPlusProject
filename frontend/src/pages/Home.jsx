@@ -5,6 +5,7 @@ import findlocation from "../assets/medplus/find-location.png";
 import BookAppoinments from "../assets/medplus/book.png";
 import vritualDoctor from "../assets/medplus/vdr.png";
 import faqImg from "../assets/medplus/faq.png";
+import vdImg from "../assets/medplus/vd.jpg";
 import { Link } from "react-router-dom";
 import { AiOutlineArrowRight } from "react-icons/ai";
 import About from "../components/About/About";
@@ -32,6 +33,7 @@ function Home() {
                   and a caring team, we're here to guide you on your path to
                   wellness
                 </p>
+                <Link to={'/services'}>
                 {/* <button className="btn">Request an Appointment</button> */}
                 <button className="relative group cursor-pointer text-sky-50  overflow-hidden h-12 w-64 rounded-xl bg-sky-800 p-2 mt-4  flex justify-center items-center font-extrabold">
                   <div className="absolute top-3 right-20 group-hover:top-12 group-hover:-right-12 z-10 w-40 h-40 rounded-full group-hover:scale-150 group-hover:opacity-50 duration-500 bg-sky-900"></div>
@@ -40,7 +42,7 @@ function Home() {
                   <div className="absolute top-3 right-20 group-hover:top-12 group-hover:-right-12 z-10 w-14 h-14 rounded-full group-hover:scale-150 group-hover:opacity-50 duration-500 bg-sky-600"></div>
                   <p className="z-10">Request an Appointment</p>
                 </button>
-
+                </Link>
                 {/* ===hero counter=== */}
                 <div className="flex flex-col items-center gap-5 mt-5 lg:mt-10 lg:flex-row lg:gap-10 ">
                   <div>
@@ -147,14 +149,14 @@ function Home() {
             </div>
           </div>
 
-          <div className="">
+          {/* <div className="">
             <Link
               to="/doctors"
               className="w-[40px] h-[40px] relative top-0  mx-auto flex mt-[30px] rounded-full border border-solid border-[#181A1E]  items-center justify-center hover:bg-blue-500 "
             >
               <AiOutlineArrowRight />
             </Link>
-          </div>
+          </div> */}
         </section>
         {/* ====3images end===== */}
 
@@ -183,15 +185,15 @@ function Home() {
                     the online scheduling tool to select an appointment time.
                   </li>
                 </ul>
-                <Link to="/">
+                {/* <Link to="/">
                   <button className="btn">Learn More</button>
-                </Link>
+                </Link> */}
               </div>
 
               {/* ===feature image=== */}
               <div className="relative z-10 xl:w-[770px] flex justify-end mt-[50px] lg:mt-[-67px] left-[-10px]  ">
                 <img
-                  src={vritualDoctor}
+                  src={vdImg}
                   alt=""
                   className="rounded-md md:w-[70%]  sm:w-[77%] w-[77%] md:mr-[26px] lg:w-[77%] "
                 />

@@ -1,25 +1,20 @@
 /* eslint-disable react/prop-types */
 import { useEffect, useState } from "react";
-import avatar from "../../assets/images/avatar-icon.png";
-import { formDate } from "../../utils/formDate.js";
 import { AiFillStar } from "react-icons/ai";
-import FeedbackForm from "./FeedbackForm";
 import { BASE_URL, token } from "../../config.js";
 import dayjs from "dayjs";
 import Pagination from "../../components/pagination/Pagination.jsx";
 const path = "http://localhost:7000/userMedia/";
-
-
+import { MdDeleteForever } from "react-icons/md";
+import Swal from "sweetalert2";
 
 
 function DoctorFeedback({ details }) {
-  const [showFeedBack, setShowFeedBack] = useState(false);
   const [reviews, setReviews] = useState([]);
   const [feedbackSubmitted, setFeedbackSubmitted] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [postPerPage, setPostPerPage] = useState(3);
-
-  console.log(reviews);
+  const user = JSON.parse(localStorage.getItem("PatientInfo"));
 
   useEffect(() => {
     const fetchReviews = async () => {
@@ -51,9 +46,48 @@ function DoctorFeedback({ details }) {
     fetchReviews();
   }, [feedbackSubmitted]);
 
+  const deleteReviewe = async (reviewId) => {
+    const result=await Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!"
+    })
+    if(result.isConfirmed){
+
+      try {
+        // eslint-disable-next-line react/prop-types
+        const res = await fetch(`${BASE_URL}/reviews/deleteReview/${reviewId}`, {
+          method: "delete",
+          headers: {
+            Authorization: `Bearer ${token} `,
+            "Content-Type": "application/json",
+          },
+        });
+  
+        let result = await res.json();
+        setFeedbackSubmitted(!feedbackSubmitted)
+        // console.log("result", result.data);
+  
+        if (!res.ok) {
+          throw new Error(result.message);
+        }
+      } catch (error) {
+        console.log("error", error);
+        Swal.fire({
+          title: "Error!",
+          text: "An error occurred while deleting the review.",
+          icon: "error",
+        });
+      }
+    }
+  };
+
   // console.log(reviews);
 
-  
   const lastPostIndex = currentPage * postPerPage;
   const firstPostIndex = lastPostIndex - postPerPage;
   const currentReviews = reviews.slice(firstPostIndex, lastPostIndex);
@@ -69,7 +103,11 @@ function DoctorFeedback({ details }) {
           <div key={index} className="flex justify-start gap-10 mb-[30px]">
             <div className="flex gap-3">
               <figure className="w-10 h-10 rounded-full ">
-                <img className="w-full" src={`${path}${el.user.photo}`} alt="" />
+                <img
+                  className="w-full"
+                  src={`${path}${el.user.photo}`}
+                  alt=""
+                />
               </figure>
               <div>
                 <h5 className="text-[16px] leading-4 text-primaryColor font-bold  ">
@@ -87,10 +125,20 @@ function DoctorFeedback({ details }) {
               </div>
             </div>
 
-            <div className="flex gap-1">
-              {[...Array(el.rating).keys()].map((_, index) => (
-                <AiFillStar key={index} color="#FFBF00" />
-              ))}
+            <div>
+              <div className="flex gap-1">
+                {[...Array(el.rating).keys()].map((_, index) => (
+                  <AiFillStar key={index} color="#FFBF00" />
+                ))}
+              </div>
+              {user._id == el.user._id && (
+                <div
+                  onClick={() => deleteReviewe(el._id)}
+                  className="flex justify-center items-center mt-7 text-[19px] hover:scale-125 hover:text-red-500 transition ease-in-out"
+                >
+                  <MdDeleteForever />
+                </div>
+              )}
             </div>
           </div>
         ))}
@@ -98,12 +146,11 @@ function DoctorFeedback({ details }) {
       <div className="mt-20 flex justify-start">
         <Pagination
           postPerPage={postPerPage}
-          totalPosts={reviews .length}
+          totalPosts={reviews.length}
           setCurrentPage={setCurrentPage}
           currentPage={currentPage}
         />
       </div>
-     
     </div>
   );
 }

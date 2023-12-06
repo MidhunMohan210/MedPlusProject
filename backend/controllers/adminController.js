@@ -26,7 +26,7 @@ export const login = async (req, res) => {
         status: true,
         message: "Login Successful!!",
         token,
-        data: { email, name },
+        data: { email, name,type:"admin" },
       });
     }
   } catch (error) {
