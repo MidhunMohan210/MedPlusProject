@@ -18,8 +18,8 @@ import { Server } from "socket.io";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
-const dbURL = "mongodb://127.0.0.1:27017/MedPlus";
-// const dbURL = "mongodb+srv://midhunmohan210:ANo8D5WIecyTYdrx@cluster0.q7zygry.mongodb.net/";
+// const dbURL = "mongodb://127.0.0.1:27017/MedPlus";
+const dbURL = "mongodb+srv://midhunmohan210:ANo8D5WIecyTYdrx@cluster0.q7zygry.mongodb.net/";
 
 mongoose
   .connect(dbURL, { useNewUrlParser: true, useUnifiedTopology: true })
