@@ -6,7 +6,7 @@ import { toast } from "react-toastify";
 import Error from "../../components/About/Error";
 
 
-const ENDPOINT = "http://localhost:7000";
+const ENDPOINT = "https://www.medplus.midhunmohan.online";
 
 var socket, selectedChatCompare;
 

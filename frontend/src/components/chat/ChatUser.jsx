@@ -7,7 +7,7 @@ import io from "socket.io-client";
 const pathUser = "http://localhost:7000/userMedia/";
 const pathDoctor = "http://localhost:7000/doctorMedia/";
 
-const ENDPOINT = "http://localhost:7000";
+const ENDPOINT = "https://www.medplus.midhunmohan.online";
 var socket, selectedChatCompare;
 
 function ChatUser({ onClose, doctor, user, photo, doctorPic,userName }) {
