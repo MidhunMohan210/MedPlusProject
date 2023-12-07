@@ -191,9 +191,7 @@ useEffect(() => {
             <div className="flex flex-col mt-8">
               <div className="flex flex-row items-center justify-between text-xs">
                 <span className="font-bold">Active Conversations</span>
-                <span className="flex items-center justify-center bg-gray-300 h-4 w-4 rounded-full">
-                  4
-                </span>
+                
               </div>
 
               {rooms.length > 0 ? (
@@ -213,9 +211,7 @@ useEffect(() => {
                       <div className="ml-2 text-sm font-semibold">
                         {chat.user.name}
                       </div>
-                      <div className="flex items-center justify-center ml-auto text-xs text-white bg-red-500 h-4 w-4 rounded leading-none">
-                        2
-                      </div>
+                    
                     </button>
                   </div>
                 ))

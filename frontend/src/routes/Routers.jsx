@@ -66,8 +66,8 @@ const Routers = () => {
 {/* ADMINNNNNN */}
      
       
-      <Route path='/admin/login' element={<ProtectedAdminRoute  allowedTypes={["admin"]} ><AdminLogin/></ProtectedAdminRoute>}/>
-      <Route path='/admin/home' element={<ProtectedAdminRoute  allowedTypes={["admin"]} ><AdminHome/></ProtectedAdminRoute>}/>
+      <Route path='/admin/login' element={<AdminLogin/>}/>
+      {/* <Route path='/admin/home' element={<ProtectedAdminRoute  allowedTypes={["admin"]} ><AdminHome/></ProtectedAdminRoute>}/> */}
       <Route path='/admin/users' element={<ProtectedAdminRoute  allowedTypes={["admin"]} ><AdminUsers/></ProtectedAdminRoute>}/>
       <Route path='/admin/doctors' element={<ProtectedAdminRoute  allowedTypes={["admin"]} ><AdminDoctors/></ProtectedAdminRoute>}/>
       <Route path='/admin/bookings' element={<ProtectedAdminRoute  allowedTypes={["admin"]} ><AdminBookings/></ProtectedAdminRoute>}/>

@@ -52,7 +52,7 @@ function Appointments() {
       <div className="relative overflow-x-auto shadow-md sm:rounded-lg p-6 mt-5">
         <div className="flex items-center justify-between flex-column flex-wrap md:flex-row space-y-4 md:space-y-0 pb-4 bg-white ">
           <div>
-            <button
+            {/* <button
               id="dropdownActionButton"
               data-dropdown-toggle="dropdownAction"
               className="inline-flex items-center text-gray-500 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-3 py-1.5  dark:text-gray-400 dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700"
@@ -75,9 +75,9 @@ function Appointments() {
                   d="m1 1 4 4 4-4"
                 />
               </svg>
-            </button>
+            </button> */}
             {/* <!-- Dropdown menu --> */}
-            <div
+            {/* <div
               id="dropdownAction"
               className="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600"
             >
@@ -118,12 +118,12 @@ function Appointments() {
                   Delete User
                 </a>
               </div>
-            </div>
+            </div> */}
           </div>
-          <label for="table-search" className="sr-only">
+          {/* <label for="table-search" className="sr-only">
             Search
-          </label>
-          <div className="relative">
+          </label> */}
+          {/* <div className="relative">
             <div className="absolute inset-y-0 rtl:inset-r-0 start-0 flex items-center ps-3 pointer-events-none">
               <svg
                 className="w-4 h-4 text-gray-500 dark:text-gray-400"
@@ -147,7 +147,7 @@ function Appointments() {
               className="block p-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-50 focus:ring-blue-500 focus:border-blue-500  dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
               placeholder="Search for users"
             />
-          </div>
+          </div> */}
         </div>
         <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 mt-2">
           <thead className="text-xs text-black uppercase bg-[#6a8fe6]">

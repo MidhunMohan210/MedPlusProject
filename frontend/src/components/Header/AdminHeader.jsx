@@ -2,16 +2,17 @@ import {useEffect,useRef} from 'react'
 import logo from '../../assets/images/logo.png'
 import { NavLink } from 'react-router-dom'
 import { BiMenu } from 'react-icons/bi'
+import { useNavigate } from 'react-router-dom'
 // import {useSelector } from 'react-redux'
 import { FiLogOut } from 'react-icons/fi'
 // import { useLogoutMutation } from '../../slices/adminSlices/adminApiSlice'?
 // import { logout } from '../../slices/adminSlices/adminAuthSlice'
 
 const navlinks = [
-  {
-    path:'/admin/home',
-    display:'Home'
-  },
+  // {
+  //   path:'/admin/home',
+  //   display:'Home'
+  // },
   {
     path:'/admin/users',
     display:'Users'
@@ -26,6 +27,9 @@ const navlinks = [
   }
 ]
 const AdminHeader = () => {
+  const navigate=useNavigate()
+
+  const adminInfo=localStorage.getItem("adminInfo")
 
     //const { adminInfo } = useSelector((state)=>state.adminAuth);
 
@@ -62,6 +66,14 @@ const AdminHeader = () => {
         window.removeEventListener('scroll',handleStickyHeader)
       }
     },)
+
+    const handleLogout = () => {
+      localStorage.removeItem("adminInfo");
+      navigate("/admin/login")
+      
+
+    };
+  
   
     const toggleMenu = ()=>menuRef.current.classList.toggle('show__menu')
   
@@ -73,29 +85,38 @@ const AdminHeader = () => {
               <img src={logo} alt="medicarelogo" />
             </div>
   
+  {
+    adminInfo && (
+      <>
+      <div className="navigation" ref={menuRef} onClick={toggleMenu}>
+        <ul className="menu flex items-center gap-[2.7rem]">
+          {
+            navlinks.map((link,index)=>
+              <li key={index}>
+                <NavLink to={link.path} className={navClass=>navClass.isActive?'text-primaryColor text-[16px] loading-7 font-[600]' : 'text-textColor text-[16px] loading-7 font-[500] hover:text-primaryColor'}>{link.display}</NavLink>
+              </li>
+            )
+          }
+          <button
+        onClick={handleLogout}
+        className="bg-primaryColor py-2 px-6 text-white font-[600] h-[37px] flex items-center cursor-pointer justify-center rounded-[50px]   "
+      >
+        Logout
+      </button>
+          {/* <li className='hidden md:block'>
+            <FiLogOut  style={{ fontSize: '2rem', cursor:'pointer', color: 'blue', backgroundColor:'#fff2e6' }}/>
+          </li> */}
+        </ul>
+      </div>
+      <span className='md:hidden' onClick={toggleMenu}>
+        <BiMenu className='w-6 h-6 cursor-pointer'/>
+      </span>
+    </>
+
+    )
+  }
          
-                <>
-                  <div className="navigation" ref={menuRef} onClick={toggleMenu}>
-                    <ul className="menu flex items-center gap-[2.7rem]">
-                      {
-                        navlinks.map((link,index)=>
-                          <li key={index}>
-                            <NavLink to={link.path} className={navClass=>navClass.isActive?'text-primaryColor text-[16px] loading-7 font-[600]' : 'text-textColor text-[16px] loading-7 font-[500] hover:text-primaryColor'}>{link.display}</NavLink>
-                          </li>
-                        )
-                      }
-                      <li  className='font-bold text-red-500 md:hidden'>
-                        LOGOUT
-                      </li>
-                      <li className='hidden md:block'>
-                        <FiLogOut  style={{ fontSize: '2rem', cursor:'pointer', color: 'blue', backgroundColor:'#fff2e6' }}/>
-                      </li>
-                    </ul>
-                  </div>
-                  <span className='md:hidden' onClick={toggleMenu}>
-                    <BiMenu className='w-6 h-6 cursor-pointer'/>
-                  </span>
-                </>
+              
               
             
           </div>

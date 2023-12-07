@@ -18,7 +18,7 @@ function AdminLogin() {
 
     const admin=localStorage.getItem("adminInfo")
     if(admin){
-      navigate("/admin/home")
+      navigate("/admin/users")
     }
 
   })
@@ -69,7 +69,7 @@ function AdminLogin() {
 
         console.log(formData.type);
 
-        navigate("/admin/home");
+        navigate("/admin/login");
       }, 1000);
     } catch (error) {
       console.log("error", error);
@@ -144,15 +144,7 @@ function AdminLogin() {
               )}
             </button>
           </div>
-          <div className="mt-4 text-sm font-semibold text-center text-slate-500 md:text-left">
-            Don't have an account?{" "}
-            <Link
-              to="/register"
-              className="text-red-600 hover:underline hover:underline-offset-4"
-            >
-              Register
-            </Link>
-          </div>
+          
         </form>
       </div>
     </section>
