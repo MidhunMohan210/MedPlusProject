@@ -48,8 +48,9 @@ const corsOptions = {
 };
 
 //configuring middlwares
-const currentWorkingDir = path.resolve()gi
+const currentWorkingDir = path.resolve()
 const parentDir = path.dirname(currentWorkingDir);
+console.log("parentDir",parentDir);
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
