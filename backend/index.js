@@ -19,7 +19,8 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 // const dbURL = "mongodb://127.0.0.1:27017/MedPlus";
-const dbURL = "mongodb+srv://midhunmohan210:ANo8D5WIecyTYdrx@cluster0.q7zygry.mongodb.net/";
+const dbURL =
+  "mongodb+srv://midhunmohan210:ANo8D5WIecyTYdrx@cluster0.q7zygry.mongodb.net/";
 
 mongoose
   .connect(dbURL, { useNewUrlParser: true, useUnifiedTopology: true })
@@ -47,6 +48,8 @@ const corsOptions = {
 };
 
 //configuring middlwares
+const currentWorkingDir = path.resolve()gi
+const parentDir = path.dirname(currentWorkingDir);
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -57,17 +60,30 @@ app.use("/api/doctors", doctorRoute);
 app.use("/api/admin", adminRoute);
 app.use("/api/reviews", reviewRoute);
 
+// if (process.env.NODE_ENV === "production") {
+//   const __dirname = path.resolve();
+//   app.use(express.static(path.join(__dirname, "/frontend/dist")));
+//   app.get('*', (req, res) =>
+//   res.sendFile(path.resolve(__dirname, 'frontend', 'dist', 'index.html'))
+// );
+// }else{
+//   app.get('/', (req, res) => {
+//     res.send('API is running....');
+//   });
+
+// }
+
 if (process.env.NODE_ENV === "production") {
   const __dirname = path.resolve();
-  app.use(express.static(path.join(__dirname, "/frontend/dist")));
-  app.get('*', (req, res) =>
-  res.sendFile(path.resolve(__dirname, 'frontend', 'dist', 'index.html'))
-);
-}else{
-  app.get('/', (req, res) => {
-    res.send('API is running....');
-  });
+  app.use(express.static(path.join(parentDir, "/frontend/dist")));
 
+  app.get("*", (req, res) =>
+    res.sendFile(path.resolve(parentDir, "frontend", "dist", "index.html"))
+  );
+} else {
+  app.get("/", (req, res) => {
+    res.send("API is running....");
+  });
 }
 
 const server = app.listen(port, () => {
