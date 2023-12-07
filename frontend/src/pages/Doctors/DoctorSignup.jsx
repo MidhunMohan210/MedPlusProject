@@ -1,10 +1,8 @@
-import React, { useState, createContext } from "react";
-import signup from "../../assets/medplus/doctorSignup.jpg";
+import  { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { BASE_URL } from "../../config";
 import { toast } from "react-toastify";
 import BeatLoader from "react-spinners/BeatLoader";
-import avatar from "../../assets/images/doctor-img01.png";
 
 function DoctorSignup() {
   // const FormDataContext = createContext();
