@@ -166,8 +166,8 @@ function ProfileSettings({ user, refetch }) {
   };
 
   return (
-    <section className="h-[250px]  flex flex-col mt-[-20] md:flex-row justify-start space-y-10 md:space-y-0 md:space-x-16  my-2 mx-5 md:mx-0 md:my-0 lg:mt-[-20px] mb-[6.5rem]">
-      <div className="max-w-md md:w-[100%] flex flex-col items-start">
+    <section className="h-fit  flex flex-col mt-[-20] md:flex-row justify-start space-y-10 md:space-y-0 md:space-x-16  my-2 mx-5 md:mx-0 md:my-0 lg:mt-[-20px] mb-[6.5rem]">
+      <div className="max-w-md md:w-[100%] flex flex-col items-start ">
         <div className="my-5 items-center before:mt-0.5 before:flex-1 before:border-t before:border-neutral-300 after:mt-0.5 after:flex-1 after:border-t after:border-neutral-300"></div>
 
         <input
@@ -238,7 +238,7 @@ function ProfileSettings({ user, refetch }) {
         <div className="flex items-center justify-center gap-7">
           {/* /////////////////////photo upload///////////////////// */}
 
-          <div className="flex flex-col items-center gap-3 mb-5 mt-7">
+          <div className="flex flex-col items-center gap-3 mb-5 mt-7 ">
             {formData.photo && formData.photo instanceof File && (
               <figure className=" w-[60px] h-[60px] rounded-full border-2 border-solid border-primaryColor flex items-center justify-center ">
                 <img
@@ -267,15 +267,13 @@ function ProfileSettings({ user, refetch }) {
             </div>
           </div>
         </div>
-        {/* {validationError && (
-           <p className="text-red-500 font-light mt-4 ">{validationError}</p>
-        )} */}
+       
 
-        <div className="text-center md:text-left ">
+        <div className="text-center md:text-left  ">
           <button
             //disabled={loading && true}
             onClick={submitHandler}
-            className="w-full px-4 py-2 mt-4 text-xs tracking-wider text-white uppercase bg-blue-600 rounded hover:bg-blue-700"
+            className="w-full px-4 py-2 mt-4 text-xs tracking-wider text-white uppercase bg-blue-600 rounded hover:bg-blue-700 "
             type="submit"
           >
             {loading ? (

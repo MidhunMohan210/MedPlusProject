@@ -7,10 +7,17 @@ import { BASE_URL, type } from "../../config";
 import Loader from "../../components/Loader/Loader";
 import Error from "../../components/About/Error";
 const path = "http://localhost:7000/userMedia/";
+import { useDispatch } from "react-redux";
+import { logoutPatient } from "../../slices/patientAuthSlice.js";
+
+
+
 
 function MyAccount() {
   // console.log(type);
-  const { dispatch } = useContext(authContext);
+  const dispatch = useDispatch();
+
+  // const { dispatch } = useContext(authContext);
   const [tab, setTab] = useState("bookings");
   // const [userData, setUserData] = useState(null);
 
@@ -28,10 +35,12 @@ function MyAccount() {
     }
   }, [error, userData, loading, userData]);
 
-  const handleLogout = () => {
-    console.log("dispatch");
-    dispatch({ type: "LOGOUT" });
-  };
+  // const handleLogout = () => {
+  //   console.log("dispatch");
+  //   // dispatch({ type: "LOGOUT" });
+  //   dispatch(logoutPatient());
+
+  // };
 
   return (
     <section>
@@ -40,7 +49,7 @@ function MyAccount() {
         {error && <Error errorMessage={error.message} />}
         {!loading && !error && (
           <div className="grid gap-10 md:grid-cols-3">
-            <div className="pb-[50px] px-[30px] rounded-md">
+            <div className="pb-[50px] px-[30px] rounded-md shadow-lg">
               <div className="flex items-center justify-center">
                 <figure className="w-[100px]  h-[100px] rounded-full border-2 border-solid border-primaryColor  ">
                   <img
@@ -66,15 +75,15 @@ function MyAccount() {
               </div>
 
               <div className="mt-[50px] md:mt-[100px]    ">
-                <button
+                {/* <button
                   onClick={handleLogout}
-                  className="w-full bg-[#181A1E] text-white p-3 text-[16px] leading-7 mb-2 rounded-md "
+                  className="w-full bg-red-600 text-white p-3 text-[16px] leading-7 mb-2 rounded-md "
                 >
                   Logout
-                </button>
-                <button className="w-full bg-red-600 text-white p-3 text-[16px] leading-7 rounded-md ">
+                </button> */}
+                {/* <button className="w-full bg-red-600 text-white p-3 text-[16px] leading-7 rounded-md ">
                   Delete Account
-                </button>
+                </button> */}
               </div>
             </div>
 

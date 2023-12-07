@@ -86,15 +86,15 @@ function DoctorAccount() {
               </div>
 
               <div className="mt-[50px] md:mt-[100px]    ">
-                <button
+                {/* <button
                   onClick={handleLogout}
-                  className="w-full bg-[#181A1E] text-white p-3 text-[16px] leading-7 mb-2 rounded-md "
+                  className="w-full bg-red-500 text-white p-3 text-[16px] leading-7 mb-2 rounded-md "
                 >
                   Logout
-                </button>
-                <button className="w-full bg-red-600 text-white p-3 text-[16px] leading-7 rounded-md ">
+                </button> */}
+                {/* <button className="w-full bg-red-600 text-white p-3 text-[16px] leading-7 rounded-md ">
                   Delete Account
-                </button>
+                </button> */}
               </div>
             </div>
 
