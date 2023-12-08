@@ -20,7 +20,7 @@ function VideoCallRoom() {
         container:element,
         sharedLinks:[{
             name:'Copy Link',
-            url:`http://localhost:5173/admin/room/${roomId}`
+            url:`https://www.medplus.midhunmohan.online/admin/room/${roomId}`
         }],
         scenario:{
             mode:ZegoUIKitPrebuilt.OneONoneCall,
