@@ -13,3 +13,4 @@ export const type= userInLocal?  userInLocal.type:null;
 // export const doctorPath ='http://localhost:7000/doctorMedia/'
 export const userPath ='https://www.medplus.midhunmohan.online/userMedia/'
 export const doctorPath ='https://www.medplus.midhunmohan.online/doctorMedia/'
+

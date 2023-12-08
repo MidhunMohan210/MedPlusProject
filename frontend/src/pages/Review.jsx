@@ -2,7 +2,8 @@ import { useEffect, useState } from "react";
 import FeedbackForm from "./Doctors/FeedbackForm";
 import { BASE_URL, token } from "../config";
 import { useParams } from "react-router-dom";
-const path = "http://localhost:7000/doctorMedia/";
+// const path = "http://localhost:7000/doctorMedia/";
+import { doctorPath } from "../config";
 
 function Review() {
   const [data, setData] = useState({});
@@ -50,7 +51,7 @@ function Review() {
               <span className="absolute right-0 m-3 h-3 w-3 rounded-full bg-green-500 ring-2 ring-green-300 ring-offset-2"></span>
               <img
                 className="mx-auto h-full w-full rounded-full object-cover"
-                src={`${path}${doctor.photo}`}
+                src={`${doctorPath}${doctor.photo}`}
                 alt=""
               />
             </div>
