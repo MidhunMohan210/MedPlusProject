@@ -6,7 +6,9 @@ import SidePanel from "./SidePanel";
 import { useParams } from "react-router-dom";
 import { BASE_URL } from "../../config";
 import getSingleDoctor from "../../hooks/useFetchData";
-const path = "http://localhost:7000/doctorMedia/";
+// const path = "http://localhost:7000/doctorMedia/";
+import { doctorPath } from "../../config";
+
 import Loader from "../../components/Loader/Loader";
 import Error from "../../components/About/Error";
 import { FaComments } from "react-icons/fa";
@@ -119,7 +121,7 @@ function DoctorDetails() {
               <div className="flex flex-col items-center gap-5 md:flex-row ">
                 <figure className="max-w-[300px] max-h-[200px]  ">
                   <img
-                    src={`${path}${details.photo}`}
+                    src={`${doctorPath}${details.photo}`}
                     alt=""
                     className="w-full rounded-lg "
                   />

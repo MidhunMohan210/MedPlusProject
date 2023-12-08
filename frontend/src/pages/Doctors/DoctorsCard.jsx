@@ -1,6 +1,7 @@
 import starIcon from "../../assets/images/Star.png";
 import { Link } from "react-router-dom";
-const path = "http://localhost:7000/doctorMedia/";
+// const path = "http://localhost:7000/doctorMedia/";
+import { doctorPath } from "../../config";
 // import { useSelector } from "react-redux";
 
 function DoctorsCard(data) {
@@ -18,7 +19,7 @@ function DoctorsCard(data) {
           <Link to={`/users/doctorDetails/${el._id}`}>
             <div>
               <img
-                src={`${path}${el.photo}`}
+                src={`${doctorPath}${el.photo}`}
                 alt=""
                 className="w-full rounded-md "
               />

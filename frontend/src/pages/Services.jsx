@@ -1,4 +1,3 @@
-import React from "react";
 import services from "../../src/assets/medplus/services.jpg";
 import { FaShieldHeart } from "react-icons/fa6";
 import { FcMindMap } from "react-icons/fc";

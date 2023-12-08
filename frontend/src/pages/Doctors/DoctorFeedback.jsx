@@ -4,7 +4,8 @@ import { AiFillStar } from "react-icons/ai";
 import { BASE_URL, token } from "../../config.js";
 import dayjs from "dayjs";
 import Pagination from "../../components/pagination/Pagination.jsx";
-const path = "http://localhost:7000/userMedia/";
+// const path = "http://localhost:7000/userMedia/";
+import { userPath } from "../../config.js";
 import { MdDeleteForever } from "react-icons/md";
 import Swal from "sweetalert2";
 
@@ -105,7 +106,7 @@ function DoctorFeedback({ details }) {
               <figure className="w-10 h-10 rounded-full ">
                 <img
                   className="w-full"
-                  src={`${path}${el.user.photo}`}
+                  src={`${userPath}${el.user.photo}`}
                   alt=""
                 />
               </figure>

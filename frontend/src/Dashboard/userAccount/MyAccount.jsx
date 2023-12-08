@@ -6,7 +6,8 @@ import userGetProfile from "../../hooks/useFetchData";
 import { BASE_URL, type } from "../../config";
 import Loader from "../../components/Loader/Loader";
 import Error from "../../components/About/Error";
-const path = "http://localhost:7000/userMedia/";
+// const path = "http://localhost:7000/userMedia/";
+import { userPath } from "../../config";
 import { useDispatch } from "react-redux";
 import { logoutPatient } from "../../slices/patientAuthSlice.js";
 
@@ -53,7 +54,7 @@ function MyAccount() {
               <div className="flex items-center justify-center">
                 <figure className="w-[100px]  h-[100px] rounded-full border-2 border-solid border-primaryColor  ">
                   <img
-                    src={`${path}${userData.photo}`}
+                    src={`${userPath}${userData.photo}`}
                     alt=""
                     className="w-full h-full rounded-full "
                   />

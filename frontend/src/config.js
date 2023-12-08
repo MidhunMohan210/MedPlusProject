@@ -9,5 +9,7 @@ export const adminToken=adminInlocal?  adminInlocal.token:null;
 console.log(adminToken);
 export const type= userInLocal?  userInLocal.type:null;
 
-export const userPath ='http://localhost:7000/userMedia/'
-export const doctorPath ='http://localhost:7000/doctorMedia/'
+// export const userPath ='http://localhost:7000/userMedia/'
+// export const doctorPath ='http://localhost:7000/doctorMedia/'
+export const userPath ='https://www.medplus.midhunmohan.online/userMedia/'
+export const doctorPath ='https://www.medplus.midhunmohan.online/doctorMedia/'

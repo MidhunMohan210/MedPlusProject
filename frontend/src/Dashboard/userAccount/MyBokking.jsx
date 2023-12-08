@@ -5,7 +5,10 @@ import Error from "../../components/About/Error";
 import useFetchData from "../../hooks/useFetchData";
 import starIcon from "../../assets/images/Star.png";
 import { Link } from "react-router-dom";
-const path = "http://localhost:7000/doctorMedia/";
+// const path = "http://localhost:7000/doctorMedia/";
+import { doctorPath } from "../../config";
+
+
 import Swal from "sweetalert2";
 import { IoIosNotifications } from "react-icons/io";
 import Pagination from "../../components/pagination/Pagination";
@@ -112,7 +115,7 @@ function MyBokking() {
                 <div>
                   <div>
                     <img
-                      src={`${path}${el.doctor.photo}`}
+                      src={`${doctorPath}${el.doctor.photo}`}
                       alt=""
                       className="w-full"
                     />
