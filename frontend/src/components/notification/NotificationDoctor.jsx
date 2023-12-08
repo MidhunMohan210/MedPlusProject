@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { BASE_URL, docToken } from "../../config";
+import dayjs from 'dayjs';
 
 // eslint-disable-next-line react/prop-types
 function NotificationDoctor({ setNotification }) {
@@ -123,7 +124,7 @@ function NotificationDoctor({ setNotification }) {
                       </span>{" "}
                     </p>
                     <p className="text-xs leading-3 pt-1 text-gray-500">
-                      2 hours ago
+                    {dayjs(el.createdAt).format("h:mm A")}
                     </p>
                   </div>
                 </div>

@@ -7,6 +7,7 @@ import Error from "../../components/About/Error";
 
 
 const ENDPOINT = "https://www.medplus.midhunmohan.online/";
+// const ENDPOINT = "http://localhost:7000";
 
 var socket, selectedChatCompare;
 
@@ -134,31 +135,18 @@ function DoctorChat() {
   };
 
 
-useEffect(() => {
-  const handleNewMessage = (newMessageReceived) => {
-    console.log("newMessageReceived", newMessageReceived);
-    toast.success(`New message from ${newMessageReceived.room.user.name}`);
-
-    if (!selectedChatCompare || chatId !== newMessageReceived.room._id) {
-      // Do nothing if the message is not for the current chat
-    } else {
-      setChats((prevChats) => [...prevChats, newMessageReceived]);
-    }
-  };
-
-  // Subscribe to the socket event
-  socket.on('message received', handleNewMessage);
-
-  // Cleanup: Unsubscribe from the socket event when the component unmounts
-  return () => {
-    socket.off('message received', handleNewMessage);
-  };
-}, [chatId, selectedChatCompare, setChats]); // Make sure to include all dependencies in the dependency array
-
-
-  // console.log(chatId);
-  // console.log(patient);
-  // console.log(chats);
+  useEffect(() => {
+    socket.on('message received',(newMessageReceived)=>{
+      console.log("newMessageReceived",newMessageReceived);
+        if(!selectedChatCompare || chatId!==newMessageReceived.room._id)
+        {
+        //  empty //
+         
+          }else{
+            setChats([...chats,newMessageReceived])
+        }
+    })
+},[chatId, selectedChatCompare,chats])
 
   return (
 

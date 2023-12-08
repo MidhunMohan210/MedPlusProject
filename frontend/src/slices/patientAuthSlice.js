@@ -1,10 +1,9 @@
 import { createSlice  } from "@reduxjs/toolkit";
 
-
-
   const PatientInfo = localStorage.getItem('PatientInfo');
   const initialState = {
-        PatientInfo: PatientInfo ? JSON.parse(PatientInfo) : null,
+  PatientInfo: PatientInfo ? JSON.parse(PatientInfo) : null,
+
   };
 
 const patientAuthSlice = createSlice ({
@@ -13,6 +12,7 @@ const patientAuthSlice = createSlice ({
     reducers:{
         setPatientCredentials:(state,action)=>{
             state.PatientInfo = action.payload;
+            localStorage.removeItem("PatientInfo")
             localStorage.setItem('PatientInfo',JSON.stringify(action.payload))
         },
         logoutPatient:(state,action)=>{
