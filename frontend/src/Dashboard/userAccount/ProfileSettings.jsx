@@ -196,7 +196,7 @@ function ProfileSettings({ user, refetch }) {
           onChange={handleInputChange}
         />
         <input
-          className="w-full px-4 py-2 mt-4 text-sm border border-gray-300 border-solid rounded"
+          className="w-full hidden px-4 py-2 mt-4 text-sm border border-gray-300 border-solid rounded"
           type="password"
           placeholder=" Type your new password"
           name="password"

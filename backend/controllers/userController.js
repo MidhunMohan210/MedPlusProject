@@ -35,6 +35,8 @@ export const getUserProfile = async (req, res) => {
 export const getMyAppointments = async (req, res) => {
   const userId = req.userId;
 
+  console.log("hakasakjdhaqkjdhak");
+
   try {
     //retrieve appointments from bokking database of a specific user
     const bookings = await Booking.find(
@@ -48,7 +50,9 @@ export const getMyAppointments = async (req, res) => {
         isCancelled: 1,
         cancelReason:1,
       }
-    ).sort({appointmentDate:1});
+    ).sort({createdAt:-1});
+
+    console.log("bookingsssssss",bookings);
 
     if (bookings.length === 0) {
       throw new Error(" Oops! You didn't have any appointments yet!");
