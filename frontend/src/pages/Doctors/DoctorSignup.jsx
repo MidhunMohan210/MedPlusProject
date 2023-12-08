@@ -250,11 +250,8 @@ function DoctorSignup() {
               </option>
               <option value="Cardiology">Cardiology</option>
               <option value="Dermatology">Dermatology</option>
-              <option value="Ophthalmology">Ophthalmology</option>
-              <option value="Orthopedics">Orthopedics</option>
-              <option value="Neurology">Neurology</option>
-              <option value="Psychiatry">Psychiatry</option>
-              <option value="Pediatrics">Pediatrics</option>
+              <option value="Ophthalmology">Neurology</option>
+              <option value="Orthopedics">Pediatrics</option>
             </select>
 
             {/* college */}

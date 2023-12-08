@@ -1,22 +1,17 @@
-import { useContext, useEffect, useState } from "react";
-import { authContext } from "../../context/AuthContext";
+import {  useEffect, useState } from "react";
 import MyBooking from "./MyBokking";
 import ProfileSettings from "./ProfileSettings";
 import userGetProfile from "../../hooks/useFetchData";
 import { BASE_URL, type } from "../../config";
 import Loader from "../../components/Loader/Loader";
 import Error from "../../components/About/Error";
-// const path = "http://localhost:7000/userMedia/";
-import { userPath } from "../../config";
-import { useDispatch } from "react-redux";
-import { logoutPatient } from "../../slices/patientAuthSlice.js";
+const path = "http://localhost:7000/userMedia/";
 
 
 
 
 function MyAccount() {
   // console.log(type);
-  const dispatch = useDispatch();
 
   // const { dispatch } = useContext(authContext);
   const [tab, setTab] = useState("bookings");
@@ -31,17 +26,14 @@ function MyAccount() {
 
   console.log(userData);
   useEffect(() => {
+    
     if (error) {
       console.log("Error in Doctor profile fetching data");
     }
-  }, [error, userData, loading, userData]);
+    refetch()
+   
+  }, []);
 
-  // const handleLogout = () => {
-  //   console.log("dispatch");
-  //   // dispatch({ type: "LOGOUT" });
-  //   dispatch(logoutPatient());
-
-  // };
 
   return (
     <section>
@@ -54,7 +46,7 @@ function MyAccount() {
               <div className="flex items-center justify-center">
                 <figure className="w-[100px]  h-[100px] rounded-full border-2 border-solid border-primaryColor  ">
                   <img
-                    src={`${userPath}${userData.photo}`}
+                    src={`${path}${userData.photo}`}
                     alt=""
                     className="w-full h-full rounded-full "
                   />

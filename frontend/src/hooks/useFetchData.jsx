@@ -15,14 +15,14 @@ function useFetchData(url) {
       });
       const result = await res.json();
       // console.log("result", result);
-      console.log(result.data);
+      // console.log(result.data);
 
       if (!res.ok) {
         throw new Error(result.message);
       }
 
       setData(result.data);
-      console.log("data", data);
+      // console.log("data", data);
 
       setLoading(false);
     } catch (fetchError) {
@@ -34,6 +34,7 @@ function useFetchData(url) {
 
   useEffect(() => {
     fetchData();
+    
   }, [url]);
 
   const refetch = () => {
