@@ -1,4 +1,5 @@
-export const BASE_URL='http://localhost:7000/api'
+// export const BASE_URL='http://localhost:7000/api'
+export const BASE_URL='https://www.medplus.midhunmohan.online/api'
 const userInLocal=JSON.parse(localStorage.getItem('PatientInfo'))
 const doctorInLocal=JSON.parse(localStorage.getItem('doctorInfo'))
 const adminInlocal =JSON.parse(localStorage.getItem('adminInfo'))
