@@ -2,79 +2,31 @@ import {  useEffect, useState } from "react";
 import MyBooking from "./MyBokking";
 import ProfileSettings from "./ProfileSettings";
 import userGetProfile from "../../hooks/useFetchData";
-import { BASE_URL, type,token } from "../../config";
+import { BASE_URL, type ,userPath} from "../../config";
 import Loader from "../../components/Loader/Loader";
 import Error from "../../components/About/Error";
-const path = "http://localhost:7000/userMedia/";
-
-
-
-console.log("tokeninnnnnnnnnnnnnnnnnnn",token);
-
-
+// const path = "http://localhost:7000/userMedia/";
 
 
 function MyAccount() {
-  // console.log(type);
+ // console.log(type);
+ // const { dispatch } = useContext(authContext);
+ const [tab, setTab] = useState("bookings");
+ // const [userData, setUserData] = useState(null);
 
+ const {
+   data: userData,
+   loading,
+   error,
+   refetch,
+ } = userGetProfile(`${BASE_URL}/users/getUserProfile`, type);
 
-  const [tab, setTab] = useState("bookings");
-  const [userData, setUserData] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
-
-
-  // const {
-  //   data: userData,
-  //   loading,
-  //   error,
-  //   refetch,
-  // } = userGetProfile(`${BASE_URL}/users/getUserProfile`, type);
-
-  // console.log(userData);
-  // useEffect(() => {
-    
-  //   if (error) {
-  //     console.log("Error in Doctor profile fetching data");
-  //   }
-  //   refetch()
-   
-  // }, []);
-
-useEffect(()=>{
-  
-  const fetchData = async () => {
-    setLoading(true);
-    try {
-      const res = await fetch(`${BASE_URL}/users/getUserProfile`, {
-        headers: { Authorization: `Bearer ${token}` },
-        // 'userType': type,
-      });
-      const result = await res.json();
-      // console.log("result", result);
-      // console.log(result.data);
-
-      if (!res.ok) {
-        throw new Error(result.message);
-      }
-
-      setUserData(result.data);
-      // console.log("data", data);
-
-      setLoading(false);
-    } catch (fetchError) {
-      console.log("fetchError", fetchError);
-      setError(fetchError);
-      setLoading(false);
-    }
-  };
-  fetchData()
-},[])
-
-
-
-console.log(userData);
-
+ console.log(userData);
+ useEffect(() => {
+   if (error) {
+     console.log("Error in Doctor profile fetching data");
+   }
+ }, [error, userData, loading, userData]);
 
   return (
     <section>
@@ -87,7 +39,7 @@ console.log(userData);
               <div className="flex items-center justify-center">
                 <figure className="w-[100px]  h-[100px] rounded-full border-2 border-solid border-primaryColor  ">
                   <img
-                    src={`${path}${userData.photo}`}
+                    src={`${userPath}${userData.photo}`}
                     alt=""
                     className="w-full h-full rounded-full "
                   />
