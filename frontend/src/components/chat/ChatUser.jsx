@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import { useEffect, useState } from "react";
-import { BASE_URL, token } from "../../config";
+import { BASE_URL, token,doctorPath,userPath } from "../../config";
 import { GrSend } from "react-icons/gr";
 import { toast } from "react-toastify";
 import io from "socket.io-client";
@@ -177,7 +177,7 @@ function ChatUser({ onClose, doctor, user, photo, doctorPic,userName }) {
                     </div>
                     <div className="flex-shrink-0 h-10 w-10 rounded-full bg-gray-300 ">
                       <img
-                        src={`${pathUser}${photo}`}
+                        src={`${userPath}${photo}`}
                         alt=""
                         className=" rounded-full h-full w-full object-cover"
                       />
@@ -187,7 +187,7 @@ function ChatUser({ onClose, doctor, user, photo, doctorPic,userName }) {
                   <div className={`flex w-full mt-2 space-x-3 max-w-xs`}>
                     <div className="flex-shrink-0 h-10 w-10 rounded-full bg-gray-300">
                       <img
-                        src={`${pathDoctor}${doctorPic}`}
+                        src={`${doctorPath}${doctorPic}`}
                         alt=""
                         className=" rounded-full h-full w-full object-cover"
                       />

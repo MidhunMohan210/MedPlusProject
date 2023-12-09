@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import fetchDoctors from "../../hooks/useFetchData";
-import { BASE_URL, adminToken } from "../../config";
+import { BASE_URL, adminToken,doctorPath } from "../../config";
 // import CertificateModal from "../../components/modals/CertificateModal";
 const path = "http://localhost:7000/doctorMedia/";
 import Swal from "sweetalert2";
@@ -411,7 +411,7 @@ const AdminDoctors = () => {
       {openModal && (
         <div className=" w-[400px] h-[350px] p-4 fixed inset-0 mx-auto my-auto    bg-gray-300 drop-shadow-2xl ">
           <div>
-            <img src={`${path}${certificate}`} alt="" />
+            <img src={`${doctorPath}${certificate}`} alt="" />
           </div>
           <div>
             <button

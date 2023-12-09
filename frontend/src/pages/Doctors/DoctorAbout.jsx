@@ -1,10 +1,11 @@
 /* eslint-disable react/prop-types */
 import { formDate } from "../../utils/formDate";
 import { useState } from "react";
-const path = "http://localhost:7000/doctorMedia/";
+// const path = "http://localhost:7000/doctorMedia/";
 import { BsChevronCompactLeft, BsChevronCompactRight } from "react-icons/bs";
 import { RxDotFilled } from "react-icons/rx";
 import { AiOutlineCloseCircle } from "react-icons/ai";
+import { doctorPath } from "../../config";
 
 function DoctorAbout({ details }) {
   console.log(details.certificate);
@@ -132,7 +133,7 @@ function DoctorAbout({ details }) {
             />
             <div
               style={{
-                backgroundImage: `url(${path}${slides[currentIndex].certificate})`,
+                backgroundImage: `url(${doctorPath}${slides[currentIndex].certificate})`,
               }}
               className="w-full h-full rounded-2xl bg-center bg-cover duration-500"
             ></div>
