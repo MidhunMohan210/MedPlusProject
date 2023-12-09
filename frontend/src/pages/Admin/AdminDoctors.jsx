@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import fetchDoctors from "../../hooks/useFetchData";
 import { BASE_URL, adminToken,doctorPath } from "../../config";
 // import CertificateModal from "../../components/modals/CertificateModal";
-const path = "http://localhost:7000/doctorMedia/";
+// const path = "http://localhost:7000/doctorMedia/";
 import Swal from "sweetalert2";
 import { FcVideoCall } from "react-icons/fc";
 import { useNavigate } from "react-router-dom";
@@ -434,7 +434,7 @@ const AdminDoctors = () => {
             />
             <div
               style={{
-                backgroundImage: `url(${path}${slides[currentIndex].certificate})`,
+                backgroundImage: `url(${doctorPath}${slides[currentIndex].certificate})`,
               }}
               className="w-full h-full rounded-2xl bg-center bg-cover duration-500"
             ></div>
